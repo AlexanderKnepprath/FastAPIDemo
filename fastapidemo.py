@@ -22,12 +22,12 @@ def create_item(item: Item):
     return items
 
 # get first 'x' items in list (via ''' curl.exe -X GET 'http://127.0.0.1:8000/items?limit={limit}' ''')
-@app.get("/items")
+@app.get("/items", response_model=list[Item])
 def list_items(limit: int = 10):
     return items[0:limit]
 
 # get a particular item from list (via ''' curl.exe -X GET 'http://127.0.0.1:8000/items/{item_id}' ''')
-@app.get('/items/{item_id}')
+@app.get('/items/{item_id}', response_model=Item)
 def get_item(item_id: int) -> Item:
     if item_id < len(items):
         return items[item_id]
